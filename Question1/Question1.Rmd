@@ -112,34 +112,40 @@ The purpose of this project  is to produce some statistics and figures on the ev
 ```{r}
 if(!require("tidyverse")) install.packages("tidyverse")
 library(tidyverse)
+library(lubridate)
+
 
 
 
 # Data loading:
 
-source( "code/Data_Collating.R")
-    
-df<- Data_Collating(Datroot = "data/Covid/")
+library(readr)
+covid_data_description <- read_csv("data/Covid/covid_data_description.csv")
+Deaths_by_cause <- read_csv("data/Covid/Deaths_by_cause.csv")
+data <- read_csv("data/Covid/owid-covid-data.csv")
+```
+```{r}
+# loading functions
+list.files('code/', full.names = T, recursive = T) %>% as.list() %>% walk(~source(.))
 ```
 
+#The first thing done is showing how African countries’ experience has differed from other regions.
+
 ```{r}
-g <-
-    df %>%
-    ggplot() +
-    geom_line(aes(x = continent, y = total_deaths, color = continent), size = 4, alpha = 0.8)
+g  <- casesovertime (data)
 g
 
 ```
 
 ```{r}
-library(readr)
-Deaths_by_cause <- read_csv("data/Covid/Deaths_by_cause.csv")
-View(Deaths_by_cause)
+gg <- newcasesovertime (data)
+
+gg
 ```
+As the graphs can show Africa did not have high levels of total Covid cases neither of new casescompared to other regions.
 
 ```{r}
-Deaths = Deaths_by_cause |> select(c(`Deaths - Tuberculosis - Sex: Both - Age: All Ages (Number)`,`Deaths - Cardiovascular diseases - Sex: Both - Age: All Ages (Number)`, `Deaths - Lower respiratory infections - Sex: Both - Age: All Ages (Number)`, `Deaths - Chronic respiratory diseases - Sex: Both - Age: All Ages (Number)`))
+deathsdiseases(Deaths_by_cause, owid_covid_data)
 ```
 
-
-# Summary of findings and discussions
+According to death caused by different diseases

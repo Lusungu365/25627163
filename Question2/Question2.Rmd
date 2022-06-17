@@ -173,7 +173,11 @@ dens <- df %>% ggplot() + geom_density(aes(x = precipitation))
 dens
 ```
 
+```{r} |> summarise_at(vars(c(sunshine, precipitation, cloud_cover, snow_depth , ~mean(.))))
 ```{r}
-weather = df |> summarise_at( vars(c(sunshine, precipitation, cloud_cover, snow_depth ), ~mean(.))
+df %>% 
+ggplot() + 
+geom_bar(aes(x = date, y = sunshine), stat = "identity")  
+    # scale_
 ```
 
