@@ -88,3 +88,13 @@ gdens <- plot %>% ggplot() + geom_density(aes(x = imdb_score,
 gdens
 ```
 comparing between movies and shows, shows have a higher and better imbd_score. This would mean shows are more preferred than movies. It would therefore be of best interest to concentrate on making more shows which would increase Netflix subscribers.
+
+```{r}
+g <-
+    titles %>%
+    ggplot() +
+    geom_line(aes(x = title, y = tmdb_popularity, color = title), size = 4, alpha = 0.8)
+g
+
+```
+
