@@ -119,4 +119,61 @@ library(tidyverse)
     dff <- read.csv(glue::glue("{lon}london_weather.csv"))
 ```
 
+```{r}
+df <- transform(dff, date = as.Date(as.character(date), "%Y%m%d")
+```
+```{r}
+weather = df |> select(c(sunshine,precipitation,snow_depth,cloud_cover))
+```
+
+```{r}
+g <- df %>% 
+
+ggplot() + 
+geom_line(aes(x = date, y = snow_depth), alpha = 0.8, 
+    size = 1)+ 
+    theme_bw() + theme(legend.position = "bottom") + labs(x = "", 
+    y = "Snow_depth", title = "Snow frequency", subtitle = " weather", 
+    caption = "Note:\nUK National Weather Service")
+
+
+g
+
+```
+
+```{r}
+g <- df %>% 
+
+ggplot() + 
+geom_col(aes(date, precipitation), alpha = 0.8, 
+    size = 3)
+   
+g 
+```
+
+```{r}
+
+g <- df %>% 
+
+ggplot() + 
+geom_line(aes(x = date, y = max_temp), alpha = 0.8, 
+    size = 1)+ 
+    theme_bw() + theme(legend.position = "bottom") + labs(x = "", 
+    y = "Snow_depth", title = "Snow frequency", subtitle = " weather", 
+    caption = "Note:\nUK National Weather Service")
+
+
+g
+
+```
+
+```{r}
+dens <- df %>% ggplot() + geom_density(aes(x = precipitation))
+
+dens
+```
+
+```{r}
+weather = df |> summarise_at( vars(c(sunshine, precipitation, cloud_cover, snow_depth ), ~mean(.))
+```
 

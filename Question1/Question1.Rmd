@@ -131,6 +131,15 @@ g
 
 ```
 
+```{r}
+library(readr)
+Deaths_by_cause <- read_csv("data/Covid/Deaths_by_cause.csv")
+View(Deaths_by_cause)
+```
+
+```{r}
+Deaths = Deaths_by_cause |> select(c(`Deaths - Tuberculosis - Sex: Both - Age: All Ages (Number)`,`Deaths - Cardiovascular diseases - Sex: Both - Age: All Ages (Number)`, `Deaths - Lower respiratory infections - Sex: Both - Age: All Ages (Number)`, `Deaths - Chronic respiratory diseases - Sex: Both - Age: All Ages (Number)`))
+```
 
 
 # Summary of findings and discussions

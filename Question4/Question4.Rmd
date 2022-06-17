@@ -59,4 +59,32 @@ library(tidyverse)
 <!-- # Start Writing here: -->
 <!-- ############################## -->
 
+```{r}
+library(readr)
+titles <- read_csv("data/netflix/titles.csv")
+View(titles)
+```
+
+```{r}
+credits <- read_csv("data/netflix/credits.csv")
+View(credits)
+```
+
+```{r}
+library(ggplot2)
+g<- ggplot(titles, aes(x="", y=value, fill=type))+
+geom_bar(width = 1, stat = "identity")
+g
+```
+
+```{r}
+plot <- titles %>% 
+group_by(type) %>% 
+mutate(imdb_score) %>% ungroup()
+
+gdens <- plot %>% ggplot() + geom_density(aes(x = imdb_score, 
+    fill = type))
+
+gdens
+```
 
